@@ -22,6 +22,10 @@ const Header = (props) => {
                             </a>
                         </li>
                     </ul>
+                    <div className="form-check form-switch text-white">
+            <input className="form-check-input" onClick={props.toggleMode} type="checkbox" role="switch" id="flexSwitchCheckDefault" checked={props.mode === 'dark'} />
+            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Mode</label>
+          </div>
                 </div>
             </nav>
         </div>
