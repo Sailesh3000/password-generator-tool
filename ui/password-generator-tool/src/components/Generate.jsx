@@ -3,8 +3,9 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { generatePasswordApi, sentMailApi, suggestPasswordApi } from "../service/PasswordGeneratorApi"
 import '../css/generate.css'
 import CopyToClipboard from "react-copy-to-clipboard";
+import PropTypes from "prop-types";
 
-const Generate = () => {
+const Generate = (props) => {
 
     const [capitalAlphabet, setcapitalAlphabet] = useState(false)
     const [smallAlphabet, setSmallAlphaabet] = useState(false)
@@ -122,19 +123,19 @@ const Generate = () => {
                                 <div className="d-inline-block text-truncate user-select-all" style={settings > 0 ? { fontSize: "18px", maxWidth: "350px" } : { color: "red" }}>{settings > 0 ? generatedPassword : 'One character must be selected'}</div>
                                 <div className="d-flex gap-3">
                                     {settings == 4 && (
-                                        <label className="my-auto fw-bold bg-success px-2 py-1 rounded-3 text-light" style={{ fontSize: "10px" }}>VERY STRONG</label>
+                                        <label className={`my-auto fw-bold bg-success px-2 py-1 rounded-3 text-${props.mode === 'light'?'dark':'light'}`} style={{ fontSize: "10px" }}>VERY STRONG</label>
                                     )}
                                     {settings == 3 && (
-                                        <label className="my-auto fw-bold bg-success bg-opacity-75 px-2 py-1 rounded-3 text-light" style={{ fontSize: "10px" }}>STRONG</label>
+                                        <label className={`my-auto fw-bold bg-success bg-opacity-75 px-2 py-1 rounded-3 text-${props.mode === 'light'?'dark':'light'}`} style={{ fontSize: "10px" }}>STRONG</label>
                                     )}
                                     {settings == 2 && (
-                                        <label className="my-auto fw-bold bg-warning px-2 py-1 rounded-3 text-light" style={{ fontSize: "10px" }}>GOOD</label>
+                                        <label className={`my-auto fw-bold bg-warning px-2 py-1 rounded-3 text-${props.mode === 'light'?'dark':'light'}`} style={{ fontSize: "10px" }}>GOOD</label>
                                     )}
                                     {settings == 1 && (
                                         <label className="my-auto bg-danger px-2 py-1 rounded-3 fw-bold" style={{ fontSize: "10px", color: "white" }}>POOR</label>
                                     )}
                                     <button
-                                        className="my-auto bg-white border-0"
+                                        className={`my-auto bg-${props.mode} border-0`}
                                         onClick={() => refreshPassword()}
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
@@ -148,7 +149,7 @@ const Generate = () => {
                                 text={passwordToCopy}
                                 onCopy={onCopyPassword}
                             >
-                                <button className="bg-primary border-0 rounded-5 shadow px-4 text-light">
+                                <button className={`bg-primary border-0 rounded-5 shadow px-4 text-${props.mode === 'light'?'dark':'light'}`}>
                                     <strong>{copy}</strong>
                                 </button>
                             </CopyToClipboard>
